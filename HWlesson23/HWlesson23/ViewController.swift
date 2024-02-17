@@ -172,7 +172,6 @@ class ViewController: UIViewController, StringDelegate {
     @objc func showBookmarksButtonTapped() {
         webView.isHidden = true
         tableView.isHidden = false
-     //   setupTableView()
 //        func bookmarkData(
 //            options: NSURL.BookmarkCreationOptions = [],
 //            includingResourceValuesForKeys keys: [URLResourceKey]?,
@@ -211,8 +210,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         print("\(indexPath)")
         webView.isHidden = true
         tableView.isHidden = false
-       // delegate?.recieveString(text: textField.text!)
-        recieveString(text: textField.text!)
+        delegate?.recieveString(text: textField.text!)
+       // recieveString(text: textField.text!)
         if let url = URL(string: textField.text!) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
