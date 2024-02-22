@@ -10,6 +10,7 @@ import WebKit
 
 class ViewController: UIViewController, StringDelegate {
     func recieveString(text: String) {
+        textField.text = text
     }
     
     
@@ -99,8 +100,6 @@ class ViewController: UIViewController, StringDelegate {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    
-    weak var delegate: StringDelegate?
     
     var bookmarkArray: Array<Bookmark> = []
 
@@ -200,6 +199,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BookmarkTableViewCell", for: indexPath) as! BookmarkTableViewCell
         cell.configure(bookmark: bookmarkArray[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -210,8 +210,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         print("\(indexPath)")
         webView.isHidden = true
         tableView.isHidden = false
-        delegate?.recieveString(text: textField.text!)
-       // recieveString(text: textField.text!)
+        recieveString(text: textField.text!)
         if let url = URL(string: textField.text!) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }

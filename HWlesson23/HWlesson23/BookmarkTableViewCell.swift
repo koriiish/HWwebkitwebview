@@ -25,6 +25,8 @@ class BookmarkTableViewCell: UITableViewCell {
         return bookmarkURLLabel
     }()
 
+    weak var delegate: StringDelegate?
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -42,6 +44,7 @@ class BookmarkTableViewCell: UITableViewCell {
     func configure(bookmark: Bookmark) {
         bookmarkLabel.text = "\(bookmark.name)"
         bookmarkURLLabel.text = "\(bookmark.url)"
+        delegate?.recieveString(text: bookmarkURLLabel.text!)
         
     }
     
